@@ -14,9 +14,9 @@
   <body>
     <h1>New York Times Explorer</h1>
     <p>The New York Times Archive provides lists of NYT articles by month going back to 1851. Simply pass in the year and month you want and Explorer will return all articles for that month.</p>
-    <form>
-      <input type="month" />
-      <button>Search</button>
+    <form id="nytForm" onsubmit="search(event)">
+      <input type="month" id="msg" />
+      <button id="btn">Search</button>
     </form>
     <div id="root"></div>
   </body>

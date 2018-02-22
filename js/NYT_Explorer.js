@@ -1,4 +1,45 @@
-class Top20 extends React.Component{
+// function search(event){
+// 	event.preventDefault();
+// 	let form=document.getElementById('msg').value;
+// 	console.log(form)
+// }
+class Form extends React.Component{
+	constructor(props){
+		super(props)
+		this.state={
+			value: ''
+		}
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	handleChange(event){
+		this.setState({value: event.target.value});
+	}
+
+	handleSubmit(event){
+		console.log(this.state.value);
+		event.preventDefault();
+	}
+
+	render(){
+		return(
+			<form onSubmit={this.handleSubmit}>
+				<label>
+					<input type="month" value={this.state.value} onChange={this.handleChange} />
+					<button></button>
+				</label>
+			</form>
+			);
+	}
+}
+ReactDOM.render(
+	<Form />, document.getElementById('root')
+	);
+
+
+
+class App extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
@@ -53,7 +94,7 @@ class Top20 extends React.Component{
 
 
 ReactDOM.render(
-	  <Top20 />,
+	  <App />,
 	  document.getElementById('root')
 	);
 
