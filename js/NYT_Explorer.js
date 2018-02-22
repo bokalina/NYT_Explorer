@@ -1,41 +1,44 @@
-// function search(event){
-// 	event.preventDefault();
-// 	let form=document.getElementById('msg').value;
-// 	console.log(form)
-// }
-class Form extends React.Component{
-	constructor(props){
-		super(props)
-		this.state={
-			value: ''
-		}
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
+function search(event){
+	event.preventDefault();
+	// let form=document.getElementById('msg').value;
+	// console.log(form)
 
-	handleChange(event){
-		this.setState({value: event.target.value});
-	}
-
-	handleSubmit(event){
-		console.log(this.state.value);
-		event.preventDefault();
-	}
-
-	render(){
-		return(
-			<form onSubmit={this.handleSubmit}>
-				<label>
-					<input type="month" value={this.state.value} onChange={this.handleChange} />
-					<button></button>
-				</label>
-			</form>
-			);
-	}
+	// console.log(window.app);
+	app.componentDidMount();
 }
-ReactDOM.render(
-	<Form />, document.getElementById('root')
-	);
+// class Form extends React.Component{
+// 	constructor(props){
+// 		super(props)
+// 		this.state={
+// 			value: ''
+// 		}
+// 		this.handleChange = this.handleChange.bind(this);
+// 		this.handleSubmit = this.handleSubmit.bind(this);
+// 	}
+
+// 	handleChange(event){
+// 		this.setState({value: event.target.value});
+// 	}
+
+// 	handleSubmit(event){
+// 		console.log(this.state.value);
+// 		event.preventDefault();
+// 	}
+
+// 	render(){
+// 		return(
+// 			<form onSubmit={this.handleSubmit}>
+// 				<label>
+// 					<input type="month" value={this.state.value} onChange={this.handleChange} />
+// 					<button></button>
+// 				</label>
+// 			</form>
+// 			);
+// 	}
+// }
+// ReactDOM.render(
+// 	<Form />, document.getElementById('root')
+// 	);
 
 
 
@@ -54,8 +57,17 @@ class App extends React.Component{
 	}
 
 	componentDidMount(){
+
+	console.log("App:componentDidMount")
+
+	let form =document.getElementById('msg').value;
+	var newform = form.split("-");
+	var year=newform[0];
+	var month=Number(newform[1]);
+	console.log("Selected y-m: " + form)
+
 		$.ajax({
-		  url: "https://api.nytimes.com/svc/archive/v1/2002/1.json",
+		  url: "https://api.nytimes.com/svc/archive/v1/" +year+"/"+month+".json",
 		  method: 'GET',
 		  data:{
 		  	'api-key':"51e7864a4e7c4a2b990dd8e41f131457"
@@ -92,8 +104,7 @@ class App extends React.Component{
 	}
 }
 
-
-ReactDOM.render(
+var app = ReactDOM.render(
 	  <App />,
 	  document.getElementById('root')
 	);
