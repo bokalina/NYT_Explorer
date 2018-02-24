@@ -54,17 +54,22 @@ class App extends React.Component{
 
 	setData(result){
 		this.setState({list: result})
+		// console.log(result)
 	}
 
 	componentDidMount(){
 
-	console.log("App:componentDidMount")
+	// console.log("App:componentDidMount")
+	// let date=Number(document.getElementById('date').value);
+	// let month=Number(document.getElementById('month').value);
+	// let year=document.getElementById('year').value;
 
 	let form =document.getElementById('msg').value;
 	var newform = form.split("-");
 	var year=newform[0];
 	var month=Number(newform[1]);
-	console.log("Selected y-m: " + form)
+	// console.log("Selected y-m-d: " + year + month + date)
+	console.log("Selected y-m:" + form)
 
 		$.ajax({
 		  url: "https://api.nytimes.com/svc/archive/v1/" +year+"/"+month+".json",
@@ -93,14 +98,69 @@ class App extends React.Component{
 				{
 					top20.map(
 						(link, index)=>(
-							<div key= {index}>
-							<a href={link.web_url}>{link.headline.main}</a>
-							</div>
+
+							<ArticlePreview  key= {index}  web_url={link.web_url}/>
+
+
+							// <div key= {index}>
+							// <a href={link.web_url}>{link.headline.main}</a>
+							// </div>
 						)
 					)
 				}
 			</div>
 			)
+	}
+}
+
+class ArticlePreview extends React.Component{
+
+	constructor(props){
+		super(props)
+
+		this.state={
+			linkPreview: {}
+		}
+
+		this.setData=this.setData.bind(this)
+	}
+
+	setData(result){
+		console.log(result);
+
+		this.setState({linkPreview: result})
+
+	}
+
+	componentDidMount(){
+		console.log("App:componentDidMount")
+		$.ajax({
+			// url: 'http://api.linkpreview.net/?key=5a8c62dd15c2c14a495f407b8ad447785894dd86df624&q=' + this.props.web_url,
+			url: 'http://api.linkpreview.net/?key=123456&q=https://www.google.com',
+			success: this.setData
+			// 	function(answer) {
+			// 	console.log(answer);
+			// }
+		})
+
+	}
+
+	render(){
+
+		const link= this.state.linkPreview;
+		// const link = {
+  //  				"title":"Google",
+  //  				"description":"Search webpages, images, videos and more.",
+  //  				"image":"https:\/\/www.google.com\/images\/logo.png",
+  //  				"url":"https:\/\/www.google.com"
+		// };
+		return(
+			<div>
+				<img src={link.img}/>
+				<h3>{link.title}</h3>
+				<p>{link.description}</p>
+			</div>
+		);
 	}
 }
 
