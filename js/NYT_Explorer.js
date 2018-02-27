@@ -46,11 +46,20 @@ class App extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			list: []
+			list: [],
+			selectedArticle: {}
 		}
 		this.setData=this.setData.bind(this)
+		this.handleArticleClick=this.handleArticleClick.bind(this)
 
 	}
+
+	handleArticleClick(item){
+                console.log("HandleArticleClick!");
+                // console.log(JSON.stringify(item));
+                console.log(JSON.stringify(item,null,2));
+                this.setState({selectedArticle: item})
+            }
 
 	setData(result){
 		this.setState({list: result})
@@ -90,7 +99,7 @@ class App extends React.Component{
 	}
 
 	render(){
-		var top20 = this.state.list.response ? this.state.list.response.docs.slice(0,20):[];
+		var top20 = this.state.list.response ? this.state.list.response.docs.slice(0,3):[];
 
 
 		return(
@@ -99,7 +108,7 @@ class App extends React.Component{
 					top20.map(
 						(link, index)=>(
 
-							<ArticlePreview  key= {index}  web_url={link.web_url}/>
+							<ArticlePreview  key= {index}  web_url={link.web_url} item={link} clickHandler={this.handleArticleClick}/>
 
 
 							// <div key= {index}>
@@ -125,6 +134,7 @@ class ArticlePreview extends React.Component{
 		this.setData=this.setData.bind(this)
 	}
 
+
 	setData(result){
 		console.log(result);
 
@@ -148,6 +158,8 @@ class ArticlePreview extends React.Component{
 	render(){
 
 		const link= this.state.linkPreview;
+		const article = this.props.item;
+		const clickHandler = this.props.clickHandler;
 		// const link = {
   //  				"title":"Google",
   //  				"description":"Search webpages, images, videos and more.",
@@ -156,8 +168,8 @@ class ArticlePreview extends React.Component{
 		// };
 		return(
 			<div>
-				<img src={link.img}/>
-				<h3>{link.title}</h3>
+				<img src={link.image}/>
+				<h3 onClick={() => clickHandler(article)}>{link.title}</h3>
 				<p>{link.description}</p>
 			</div>
 		);
