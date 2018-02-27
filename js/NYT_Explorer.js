@@ -146,7 +146,7 @@ class ArticlePreview extends React.Component{
 		console.log("App:componentDidMount")
 		$.ajax({
 			// url: 'http://api.linkpreview.net/?key=5a8c62dd15c2c14a495f407b8ad447785894dd86df624&q=' + this.props.web_url,
-			url: 'http://api.linkpreview.net/?key=123456&q=https://www.google.com',
+			url: 'https://api.linkpreview.net/?key=123456&q=https://www.google.com',
 			success: this.setData
 			// 	function(answer) {
 			// 	console.log(answer);
