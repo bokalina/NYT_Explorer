@@ -47,7 +47,7 @@ class App extends React.Component{
 		super(props)
 		this.state = {
 			list: [],
-			selectedArticle: {}
+			selectedArticle: null
 		}
 		this.setData=this.setData.bind(this)
 		this.handleArticleClick=this.handleArticleClick.bind(this)
@@ -63,7 +63,8 @@ class App extends React.Component{
 
 	setData(result){
 		this.setState({list: result})
-		// console.log(result)
+		console.log(result)
+		// console.log(result.response.docs[1].word_count)
 	}
 
 	componentDidMount(){
@@ -101,8 +102,8 @@ class App extends React.Component{
 	render(){
 		var top20 = this.state.list.response ? this.state.list.response.docs.slice(0,3):[];
 
-
 		return(
+			<div>
 			<div>
 				{
 					top20.map(
@@ -110,7 +111,7 @@ class App extends React.Component{
 
 							<ArticlePreview  key= {index}  web_url={link.web_url} item={link} clickHandler={this.handleArticleClick}/>
 
-
+				
 							// <div key= {index}>
 							// <a href={link.web_url}>{link.headline.main}</a>
 							// </div>
@@ -118,6 +119,11 @@ class App extends React.Component{
 					)
 				}
 			</div>
+			<div className="details">
+                <ArticleDetails
+                    article={this.state.selectedArticle}/>
+            </div>
+            </div>
 			)
 	}
 }
@@ -145,8 +151,8 @@ class ArticlePreview extends React.Component{
 	componentDidMount(){
 		console.log("App:componentDidMount")
 		$.ajax({
-			// url: 'http://api.linkpreview.net/?key=5a8c62dd15c2c14a495f407b8ad447785894dd86df624&q=' + this.props.web_url,
-			url: 'https://api.linkpreview.net/?key=123456&q=https://www.google.com',
+			url: 'http://api.linkpreview.net/?key=5a8c62dd15c2c14a495f407b8ad447785894dd86df624&q=' + this.props.web_url,
+			// url: 'https://api.linkpreview.net/?key=123456&q=https://www.google.com',
 			success: this.setData
 			// 	function(answer) {
 			// 	console.log(answer);
@@ -160,6 +166,7 @@ class ArticlePreview extends React.Component{
 		const link= this.state.linkPreview;
 		const article = this.props.item;
 		const clickHandler = this.props.clickHandler;
+		
 		// const link = {
   //  				"title":"Google",
   //  				"description":"Search webpages, images, videos and more.",
@@ -168,13 +175,43 @@ class ArticlePreview extends React.Component{
 		// };
 		return(
 			<div>
+			<div onClick={() => clickHandler(article)}>
 				<img src={link.image}/>
-				<h3 onClick={() => clickHandler(article)}>{link.title}</h3>
+				<h3>{link.title}</h3>
 				<p>{link.description}</p>
+			</div>
+
 			</div>
 		);
 	}
 }
+
+function ArticleDetails(props) {
+    const article = props.article;
+    // debugger;
+    if(article){
+    	return (
+        <div>
+        	
+            <ul>
+                <li>Title: {article.hasOwnProperty('headline') ? article.headline.main : ''}</li>
+                <li>Website: {article.web_url}</li>
+                <li>Number of words: {article.word_count}</li>
+                <li>Type: {article.document_type}</li>
+                <li>Published: {article.pub_date}</li>
+                <li>Section: {article.section_name}</li>
+                <li>Author: {article.byline.original}</li>
+            </ul>
+        </div>
+
+    );
+    } else {
+    	return <p>:)</p>
+    }
+
+    
+}
+
 
 var app = ReactDOM.render(
 	  <App />,
