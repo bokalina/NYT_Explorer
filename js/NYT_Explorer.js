@@ -100,11 +100,11 @@ class App extends React.Component{
 	}
 
 	render(){
-		var top20 = this.state.list.response ? this.state.list.response.docs.slice(0,3):[];
+		var top20 = this.state.list.response ? this.state.list.response.docs.slice(0,20):[];
 
 		return(
-			<div>
-			<div>
+			<div className="flex-container">
+			<div id="articles">
 				{
 					top20.map(
 						(link, index)=>(
@@ -151,8 +151,8 @@ class ArticlePreview extends React.Component{
 	componentDidMount(){
 		console.log("App:componentDidMount")
 		$.ajax({
-			url: 'https://api.linkpreview.net/?key=5a8c62dd15c2c14a495f407b8ad447785894dd86df624&q=' + this.props.web_url,
-			// url: 'https://api.linkpreview.net/?key=123456&q=https://www.google.com',
+			// url: 'https://api.linkpreview.net/?key=5a8c62dd15c2c14a495f407b8ad447785894dd86df624&q=' + this.props.web_url,
+			url: 'https://api.linkpreview.net/?key=123456&q=https://www.google.com',
 			success: this.setData
 			// 	function(answer) {
 			// 	console.log(answer);
@@ -191,7 +191,7 @@ function ArticleDetails(props) {
     // debugger;
     if(article){
     	return (
-        <div>
+        <div className="details">
         	
             <ul>
                 <li>Title: {article.hasOwnProperty('headline') ? article.headline.main : ''}</li>

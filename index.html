@@ -4,23 +4,30 @@
     <title>NYT Explorer</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/NYT_Explorer.css">
   </head>
   <body>
+    <header>
     <h1>New York Times Explorer</h1>
+    </header>
     <p>The New York Times Archive provides lists of NYT articles by month going back to 1851. Simply pass in the year and month you want and Explorer will return all articles for that month.</p>
-    <form id="nytForm" onsubmit="search(event)">
-      <input type="month" id="msg" />
+    <!-- <div class="container"> -->
+      <form id="nytForm" onsubmit="search(event)">
+        <input type="month" id="msg" />
       <!-- <input type="number" id="date" min="1" max="31" placeholder="Enter date"/>
       <input type="number" id="month" min="1" max="12" placeholder="Enter month" required />
       <input type="number" id="year" min="1851" max="2018" placeholder="Enter year" /> -->
-      <button id="btn">Search</button>
-    </form>
+        <button id="btn">Search</button>
+      </form>
+    <!-- </div> -->
     <div id="root"></div>
     <script type="text/babel" src="js/NYT_Explorer.js"></script>
+    <footer></footer>
   </body>
 </html>
