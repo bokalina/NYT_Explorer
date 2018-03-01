@@ -119,7 +119,7 @@ class App extends React.Component{
 					)
 				}
 			</div>
-			<div className="column" id="details">
+			<div className="column1" id="details">
                 <ArticleDetails
                     article={this.state.selectedArticle}/>
             </div>
@@ -174,11 +174,11 @@ class ArticlePreview extends React.Component{
   //  				"url":"https:\/\/www.google.com"
 		// };
 		return(
-			<div>
-			<div onClick={() => clickHandler(article)}>
-				<img src={link.image}/>
-				<h3>{link.title}</h3>
-				<p>{link.description}</p>
+			<div className="container">
+			<div className ="card" onClick={() => clickHandler(article)}>
+				<img className="picture" src={link.image}/>
+				<h3 className="articleTitle">{link.title}</h3>
+				<p className="artDescription">{link.description}</p>
 			</div>
 
 			</div>
@@ -191,7 +191,7 @@ function ArticleDetails(props) {
     // debugger;
     if(article){
     	return (
-        <div id="details">
+        <div className="details">
         	
             <ul>
                 <li>Title: {article.hasOwnProperty('headline') ? article.headline.main : ''}</li>
