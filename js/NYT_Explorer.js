@@ -103,8 +103,8 @@ class App extends React.Component{
 		var top20 = this.state.list.response ? this.state.list.response.docs.slice(0,20):[];
 
 		return(
-			<div className="flex-container">
-			<div id="articles">
+			<div className="row">
+			<div className="column" id="articles">
 				{
 					top20.map(
 						(link, index)=>(
@@ -119,7 +119,7 @@ class App extends React.Component{
 					)
 				}
 			</div>
-			<div className="details">
+			<div className="column" id="details">
                 <ArticleDetails
                     article={this.state.selectedArticle}/>
             </div>
@@ -191,7 +191,7 @@ function ArticleDetails(props) {
     // debugger;
     if(article){
     	return (
-        <div className="details">
+        <div id="details">
         	
             <ul>
                 <li>Title: {article.hasOwnProperty('headline') ? article.headline.main : ''}</li>

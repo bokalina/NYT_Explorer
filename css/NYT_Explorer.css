@@ -1,78 +1,79 @@
 *{
 	box-sizing: border-box;
 }
+
 body{
 	margin: 0;
-	/*background-color: lightgray;*/
+	background-color: #fff5e6;
+  background: linear-gradient(90deg, #fff5e6, #ffd699);
+}
+
+header{
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.8vw;
+  font-family: Arial;
+}
+
+p{
+  text-align: justify;
+  font-size: 2vw;
 }
 
 #nytForm{
-	/*float: left;*/
 	width:100%;
 	text-align: center;
 }
 
-.flex-container{
-	display: flex;
-	flex-wrap: wrap;
-    background-color: DodgerBlue;
-}
-
-/*.flex-container > div {
-  background-color: #f1f1f1;
-  width: 100px;
-  margin: 10px;
-  text-align: center;
-  line-height: 75px;
-  font-size: 30px;
-}*/
 #articles{
-	/*overflow: auto;*/
 	float: left;
 	flex:60%;
 	text-align: center;
 }
 
-.details{
-	/*display:flex;*/
-	/*overflow: auto;*/
+#details{
+	display:flex;
 	float: left;
-    flex: 40%;
-    color: black;
-    text-align: left;
-    /*border: solid black;*/
+  flex: 40%;
+  color: black;
+  text-align: left; 
 }
 
-@media only screen and (max-width:500px) {
-  /* For mobile phones: */
-  /*.flex-container {
+@media (min-width: 320px){
+     /*For mobiles: */
+    .row {
   	display: flex;
   	flex-direction: column;
-  }*/
-  .articles, .details, {
+  }
+  
+    .column, {
+      flex:100%;
+  }
+}
+
+@media (min-width: 426px){
+   /*For tablets: */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
   }
-}
-
-@media only screen and (min-width: 700px) {
-    /* For tablets: */
-   /* .flex-container {
-  	display: flex;
-  	flex-direction: row;
-  }*/
-  
-    .articles, .details, {
-    	flex-direction: column;
+  .column, {
+    width: 100%;
   }
 }
 
-/*@media only screen and (max-width:768px) {
-   /*For mobile phones: */
-  /*.articles, .details {*/
-    /*width:100%;*/
-  /*}*/
-  /*.flex-container {*/
-  	/*display: flex;*/
-  	/*flex-wrap: wrap;*/
-  /*}*/
-/*}*/
+@media (min-width: 1024px)) {
+   /*For desktops: */
+  .row {
+    display:flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+  }
+  .column, {
+    width: 100%;
+  }
+}
+
+
